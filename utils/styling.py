@@ -1,6 +1,6 @@
 """Reusable styling / UI component helpers for PEMTwin AI."""
-
 from pathlib import Path
+import pandas as pd
 import streamlit as st
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
@@ -13,6 +13,29 @@ def inject_css():
     if CSS_PATH.exists():
         css = CSS_PATH.read_text()
         st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
+
+
+def style_table(obj):
+    """Force a white background + black text on any dataframe/Styler
+    passed to st.dataframe(). Works whether you pass a plain DataFrame
+    or one you've already chained .style.format(...) onto.
+
+    Usage:
+        st.dataframe(style_table(my_df), use_container_width=True)
+        st.dataframe(style_table(my_df.style.format({...})), ...)
+    """
+    styler = obj if isinstance(obj, pd.io.formats.style.Styler) else obj.style
+    return styler.set_properties(**{
+        "background-color": "white",
+        "color": "black",
+        "border-color": "#E2E8F0",
+    }).set_table_styles([
+        {"selector": "th", "props": [
+            ("background-color", "#F1F5F9"),
+            ("color", "#0F172A"),
+            ("font-weight", "700"),
+        ]}
+    ])
 
 
 def render_brand_header():
