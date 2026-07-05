@@ -4,10 +4,11 @@ import streamlit as st
 import plotly.graph_objects as go
 import pandas as pd
 
-from utils.styling import section_header, card_open, card_close, pill
+from utils.styling import section_header, card_open, card_close, pill, style_table
 from utils.data_loader import load_all_reference_data
 
 STRATEGY_COLORS = {"High Production": "#DC2626", "Balanced": "#059669", "Conservative": "#2563EB"}
+HOVERLABEL = dict(bgcolor="white", font_color="#0F172A", font_size=13, bordercolor="#E2E8F0")
 
 
 def render(go_to):
@@ -73,6 +74,7 @@ def render(go_to):
         xaxis_title="Voltage Loss (V)", yaxis_title="Hydrogen Production (mol/s)",
         legend=dict(orientation="h", y=-0.2),
         font=dict(color="#0F172A"),
+        hoverlabel=HOVERLABEL,
     )
     card_open()
     st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
@@ -98,6 +100,7 @@ def render(go_to):
         height=400, margin=dict(l=10, r=10, t=10, b=10),
         paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
         xaxis_title=x_axis, yaxis_title=y_axis, font=dict(color="#0F172A"),
+        hoverlabel=HOVERLABEL,
     )
     card_open()
     st.plotly_chart(fig2, use_container_width=True, config={"displayModeBar": False})
@@ -111,10 +114,10 @@ def render(go_to):
         display_df = op_conditions.copy()
         display_df.rename(columns={display_df.columns[0]: "Strategy"}, inplace=True)
         st.dataframe(
-            display_df.style.format({
+            style_table(display_df.style.format({
                 "Temperature": "{:.2f}", "Voltage": "{:.3f}", "Conductivity": "{:.2f}",
                 "H2": "{:.3e}", "Efficiency": "{:.4f}", "Voltage Loss": "{:.4f}", "Degradation": "{:.4f}",
-            }),
+            })),
             use_container_width=True, hide_index=True,
         )
 
