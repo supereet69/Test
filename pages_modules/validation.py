@@ -5,8 +5,10 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
-from utils.styling import section_header, card_open, card_close
+from utils.styling import section_header, card_open, card_close, style_table
 from utils.data_loader import load_all_reference_data, TARGET_META
+
+HOVERLABEL = dict(bgcolor="white", font_color="#0F172A", font_size=13, bordercolor="#E2E8F0")
 
 # Mapping between the friendly target keys and the actual/predicted CSV columns
 TARGET_COLS = {
@@ -48,7 +50,7 @@ def render(go_to):
     section_header("Model Comparison Summary")
     if model_comp is not None:
         card_open()
-        st.dataframe(model_comp, use_container_width=True, hide_index=True)
+        st.dataframe(style_table(model_comp), use_container_width=True, hide_index=True)
         card_close()
     else:
         st.warning(f"Model comparison table unavailable ({errors.get('model_comparison')}).")
@@ -68,6 +70,7 @@ def render(go_to):
             barmode="group", height=400, margin=dict(l=10, r=10, t=10, b=10),
             paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
             yaxis_title="R²", legend=dict(orientation="h", y=-0.25), font=dict(color="#0F172A"),
+            hoverlabel=HOVERLABEL,
         )
         card_open()
         st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
@@ -80,7 +83,7 @@ def render(go_to):
     if rf_5fold is not None:
         card_open()
         st.dataframe(
-            rf_5fold.style.format({c: "{:.4f}" for c in rf_5fold.columns if c != "Target"}),
+            style_table(rf_5fold.style.format({c: "{:.4f}" for c in rf_5fold.columns if c != "Target"})),
             use_container_width=True, hide_index=True,
         )
         card_close()
@@ -96,7 +99,7 @@ def render(go_to):
         st.markdown("**Random Forest**")
         if rf_ext is not None:
             card_open()
-            st.dataframe(rf_ext, use_container_width=True, hide_index=True)
+            st.dataframe(style_table(rf_ext), use_container_width=True, hide_index=True)
             card_close()
         else:
             st.warning(f"Unavailable ({errors.get('rf_external')}).")
@@ -104,7 +107,7 @@ def render(go_to):
         st.markdown("**Gaussian Process Regression**")
         if gpr_ext_metrics is not None:
             card_open()
-            st.dataframe(gpr_ext_metrics, use_container_width=True, hide_index=True)
+            st.dataframe(style_table(gpr_ext_metrics), use_container_width=True, hide_index=True)
             card_close()
         else:
             st.warning(f"Unavailable ({errors.get('gpr_external_metrics')}).")
@@ -146,6 +149,7 @@ def render(go_to):
             title="Predicted vs Actual", height=360, margin=dict(l=10, r=10, t=40, b=10),
             paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
             xaxis_title="Actual (CFD)", yaxis_title="Predicted (GPR)", font=dict(color="#0F172A"),
+            hoverlabel=HOVERLABEL,
         )
         card_open()
         st.plotly_chart(fig_pv, use_container_width=True, config={"displayModeBar": False})
@@ -161,6 +165,7 @@ def render(go_to):
             title="Residual Plot", height=360, margin=dict(l=10, r=10, t=40, b=10),
             paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
             xaxis_title="Predicted", yaxis_title="Residual (Actual − Predicted)", font=dict(color="#0F172A"),
+            hoverlabel=HOVERLABEL,
         )
         card_open()
         st.plotly_chart(fig_res, use_container_width=True, config={"displayModeBar": False})
@@ -174,6 +179,7 @@ def render(go_to):
         height=300, margin=dict(l=10, r=10, t=10, b=10),
         paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
         xaxis_title="Residual", yaxis_title="Count", font=dict(color="#0F172A"),
+        hoverlabel=HOVERLABEL,
     )
     card_open()
     st.plotly_chart(fig_hist, use_container_width=True, config={"displayModeBar": False})
