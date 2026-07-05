@@ -1,213 +1,114 @@
-/* ============ PEMTwin AI — Industrial White Theme ============ */
+/* ============================================================
+   FORCE WHITE THEME & TEXT COLORS (Streamlit Cloud Fix)
+   ============================================================ */
 
-:root{
-    --accent: #2563EB;
-    --accent-dark: #1D4ED8;
-    --accent-light: #EFF6FF;
-    --ink: #0F172A;
-    --ink-soft: #475569;
-    --line: #E2E8F0;
-    --bg: #FFFFFF;
-    --bg-soft: #F8FAFC;
-    --success: #059669;
-    --warning: #D97706;
-    --danger: #DC2626;
-    --purple: #7C3AED;
-    --radius: 16px;
-    --shadow: 0 1px 2px rgba(15,23,42,0.04), 0 8px 24px rgba(15,23,42,0.06);
-    --shadow-hover: 0 4px 10px rgba(15,23,42,0.06), 0 16px 32px rgba(15,23,42,0.10);
+/* Main app */
+.stApp {
+    background: #FFFFFF !important;
+    color: #0F172A !important;
 }
 
-html, body, [class*="css"]  {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+/* Main container */
+.main .block-container {
+    background: #FFFFFF !important;
+    color: #0F172A !important;
 }
 
-.stApp{
-    background: var(--bg);
+/* All markdown text */
+.stMarkdown,
+.stMarkdown p,
+.stMarkdown div,
+.stMarkdown span,
+.stMarkdown li,
+.stMarkdown strong {
+    color: #0F172A !important;
 }
 
-#MainMenu, footer, header {visibility: hidden;}
-
-.block-container{
-    padding-top: 1.2rem;
-    padding-bottom: 3rem;
-    max-width: 1300px;
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+    color: #0F172A !important;
 }
 
-/* ---------- Top Nav ---------- */
-.pemtwin-topbar{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding: 14px 6px 10px 6px;
-    border-bottom: 1px solid var(--line);
-    margin-bottom: 18px;
-}
-.pemtwin-brand{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-.pemtwin-logo{
-    width:46px;height:46px;border-radius:12px;
-    background: linear-gradient(135deg, var(--accent), #60A5FA);
-    display:flex;align-items:center;justify-content:center;
-    color:white;font-weight:800;font-size:18px;
-    box-shadow: var(--shadow);
-}
-.pemtwin-title{
-    font-size:20px;font-weight:800;color:var(--ink);line-height:1.1;
-}
-.pemtwin-subtitle{
-    font-size:12px;color:var(--ink-soft);font-weight:500;
+/* Hero */
+.hero-title {
+    color: #0F172A !important;
 }
 
-/* ---------- Option Menu overrides ---------- */
-div[data-testid="stHorizontalBlock"] {gap: 0.6rem;}
-
-/* ---------- Cards ---------- */
-.card{
-    background: var(--bg);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 22px 24px;
-    box-shadow: var(--shadow);
-    transition: all .2s ease;
-}
-.card:hover{
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-2px);
-}
-.card-flat{
-    background: var(--bg-soft);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 18px 20px;
+.hero-sub {
+    color: #475569 !important;
 }
 
-/* ---------- Hero ---------- */
-.hero-badge{
-    display:inline-flex;align-items:center;gap:8px;
-    background: var(--accent-light);
-    color: var(--accent-dark);
-    font-weight:600;font-size:12.5px;
-    padding:6px 14px;border-radius:999px;
-    border:1px solid #DBEAFE;
-    margin-bottom:14px;
-}
-.hero-title{
-    font-size:44px;font-weight:850;letter-spacing:-0.02em;color:var(--ink);
-    margin-bottom:6px;
-}
-.hero-sub{
-    font-size:16px;color:var(--ink-soft);max-width:720px;line-height:1.55;
+/* Section */
+.section-title {
+    color: #0F172A !important;
+    font-weight: 800;
 }
 
-/* ---------- KPI Cards ---------- */
-.kpi-card{
-    border-radius: var(--radius);
-    padding: 20px 22px;
-    border: 1px solid var(--line);
-    border-left: 4px solid var(--accent);
-    background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFF 100%);
-    box-shadow: var(--shadow);
-    transition: all .2s ease;
-    position:relative;
-    overflow:hidden;
-}
-.kpi-card:hover{ box-shadow: var(--shadow-hover); transform: translateY(-2px);}
-.kpi-label{ font-size:13px; font-weight:700; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.04em;}
-.kpi-value{ font-size:30px; font-weight:800; color:var(--ink); margin-top:6px;}
-.kpi-unit{ font-size:13px; color:var(--ink-soft); font-weight:500;}
-.kpi-delta{ font-size:12.5px; font-weight:600; margin-top:6px;}
-
-/* colored accents */
-.kpi-blue{ border-left-color:#2563EB; }
-.kpi-green{ border-left-color:#059669; }
-.kpi-orange{ border-left-color:#D97706; }
-.kpi-purple{ border-left-color:#7C3AED; }
-
-/* ---------- Section headers ---------- */
-.section-title{
-    font-size:22px;font-weight:800;color:var(--ink);margin-bottom:2px;
-}
-.section-sub{
-    font-size:14px;color:var(--ink-soft);margin-bottom:16px;
+.section-sub {
+    color: #475569 !important;
 }
 
-/* ---------- Pills / badges ---------- */
-.pill{
-    display:inline-block;padding:4px 12px;border-radius:999px;
-    font-size:12px;font-weight:700;
-}
-.pill-blue{ background:#EFF6FF;color:#1D4ED8; }
-.pill-green{ background:#ECFDF5;color:#047857; }
-.pill-orange{ background:#FFF7ED;color:#C2410C; }
-.pill-purple{ background:#F5F3FF;color:#6D28D9; }
-.pill-gray{ background:#F1F5F9;color:#475569; }
-
-/* ---------- Nav cards (home) ---------- */
-.nav-card{
-    border:1px solid var(--line);
-    border-radius: var(--radius);
-    padding:20px;
-    background:var(--bg);
-    box-shadow: var(--shadow);
-    transition: all .2s ease;
-    height:100%;
-}
-.nav-card:hover{
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-3px);
-    border-color:#BFDBFE;
-}
-.nav-card-icon{
-    width:42px;height:42px;border-radius:10px;
-    background:var(--accent-light);
-    display:flex;align-items:center;justify-content:center;
-    font-size:20px;margin-bottom:10px;
+/* Brand */
+.pemtwin-title {
+    color: #0F172A !important;
 }
 
-/* ---------- Health indicator ---------- */
-.health-dot{
-    width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px;
-}
-.health-good{ background:#059669; }
-.health-warn{ background:#D97706; }
-.health-bad{ background:#DC2626; }
-
-/* ---------- Buttons ---------- */
-div.stButton > button{
-    border-radius:12px;
-    font-weight:700;
-    border:1px solid var(--line);
-    box-shadow: var(--shadow);
-    transition: all .15s ease;
-}
-div.stButton > button:hover{
-    border-color: var(--accent);
-    color: var(--accent-dark);
-    box-shadow: var(--shadow-hover);
-}
-div.stButton > button[kind="primary"]{
-    background: var(--accent);
-    border-color: var(--accent);
-    color:white;
-}
-div.stButton > button[kind="primary"]:hover{
-    background: var(--accent-dark);
-    color:white;
+.pemtwin-subtitle {
+    color: #475569 !important;
 }
 
-/* Sliders accent */
-div[data-baseweb="slider"] div[role="slider"]{
-    background-color: var(--accent) !important;
+/* Cards */
+.card,
+.card *,
+.card-flat,
+.card-flat *,
+.nav-card,
+.nav-card *,
+.kpi-card,
+.kpi-card * {
+    color: inherit;
 }
 
-/* Footer */
-.pemtwin-footer{
-    text-align:center;color:var(--ink-soft);font-size:12.5px;
-    padding-top:30px;border-top:1px solid var(--line);margin-top:40px;
+.card {
+    color: #0F172A !important;
 }
 
-hr{ border-color: var(--line); }
+.nav-card {
+    color: #0F172A !important;
+}
+
+.kpi-label {
+    color: #475569 !important;
+}
+
+.kpi-value {
+    color: #0F172A !important;
+}
+
+.kpi-unit {
+    color: #475569 !important;
+}
+
+/* Streamlit widgets */
+label,
+.stSelectbox label,
+.stSlider label,
+.stNumberInput label,
+.stTextInput label {
+    color: #0F172A !important;
+}
+
+/* Paragraphs */
+p {
+    color: #475569 !important;
+}
+
+/* Sidebar (if enabled later) */
+section[data-testid="stSidebar"] {
+    background: #FFFFFF !important;
+    color: #0F172A !important;
+}
+
+section[data-testid="stSidebar"] * {
+    color: #0F172A !important;
+}
