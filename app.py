@@ -16,7 +16,7 @@ from utils.styling import inject_css, footer
 
 st.set_page_config(
     page_title="PEMTwin AI — PEM Electrolyser Digital Twin",
-    page_icon="🧪",
+    page_icon="",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
