@@ -49,9 +49,12 @@ html, body, [class*="css"]  {
    Without this, dark-mode defaults make text invisible
    on white cards until it's highlighted/selected. */
 
-.stApp, .stApp p, .stApp span, .stApp li, .stApp label,
-.stMarkdown, .stMarkdown p, .stMarkdown span, .stMarkdown li,
-.stText, .stCaption, .stCodeBlock, .stAlert, .stException {
+/* Scoped to markdown/text containers only — NOT buttons, NOT code blocks,
+   so it can't blacken button labels or fight the code-block theme below. */
+[data-testid="stMarkdownContainer"] p,
+[data-testid="stMarkdownContainer"] span,
+[data-testid="stMarkdownContainer"] li,
+.stText, .stAlert, .stException {
     color: var(--ink);
 }
 
@@ -144,9 +147,14 @@ button[data-baseweb="tab"][aria-selected="true"]{
     color: var(--ink) !important;
 }
 
-/* Code blocks */
-code, pre, .stCodeBlock code {
+/* Code blocks (st.code) — Streamlit keeps a dark background here by
+   default. Set BOTH background and text so we never get black-on-black. */
+.stCodeBlock, .stCodeBlock pre, .stCodeBlock code,
+div[data-testid="stCodeBlock"] pre {
+    background-color: var(--bg-soft) !important;
     color: var(--ink) !important;
+    border: 1px solid var(--line);
+    border-radius: 10px;
 }
 
 /* ============ END GLOBAL TEXT & WIDGET FIXES ============ */
@@ -321,6 +329,26 @@ div.stButton > button[kind="primary"]:hover{
     color:white;
 }
 
+/* Download button — Streamlit gives this its own dark skin by default,
+   separate from stButton, so it needs its own explicit light theme. */
+div.stDownloadButton > button{
+    border-radius:12px;
+    font-weight:700;
+    border:1px solid var(--line);
+    box-shadow: var(--shadow);
+    transition: all .15s ease;
+    color: var(--ink) !important;
+    background-color: var(--bg) !important;
+}
+div.stDownloadButton > button p, div.stDownloadButton > button span{
+    color: var(--ink) !important;
+}
+div.stDownloadButton > button:hover{
+    border-color: var(--accent);
+    color: var(--accent-dark) !important;
+    box-shadow: var(--shadow-hover);
+}
+
 /* Sliders accent */
 div[data-baseweb="slider"] div[role="slider"]{
     background-color: var(--accent) !important;
@@ -333,16 +361,26 @@ div[data-baseweb="slider"] div[role="slider"]{
 }
 
 hr{ border-color: var(--line); }
-/* Force black text on all Plotly charts */
+
+/* Force black text on all Plotly charts (safe: these are real SVG text
+   nodes, not canvas, so CSS can recolor them). */
 .js-plotly-plot text, .js-plotly-plot tspan {
     fill: #0F172A !important;
 }
 
-/* Force white bg + black text on Streamlit dataframes */
+/* NOTE on st.dataframe: it renders its grid on a <canvas>, not real DOM
+   text/background — CSS cannot recolor canvas pixels. Do NOT add div/span
+   color or background-color overrides targeting its internals; they only
+   paint a solid layer on top of the canvas and hide the whole table
+   (this is what caused the blank white tables). To control a table's
+   colors, style it in Python with a pandas Styler instead, e.g.:
+     st.dataframe(df.style.set_properties(**{
+         'background-color': 'white', 'color': 'black'
+     }), use_container_width=True)
+   This wrapper rule only touches the outer border/corner, which IS
+   real DOM and safe to style. */
 [data-testid="stDataFrame"] {
-    background-color: white !important;
-}
-[data-testid="stDataFrame"] div, [data-testid="stDataFrame"] span {
-    color: #0F172A !important;
-    background-color: white !important;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
 }
