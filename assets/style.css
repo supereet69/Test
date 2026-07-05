@@ -1,193 +1,335 @@
-/* ============================================================
-   FORCE WHITE THEME & TEXT COLORS (Streamlit Cloud Fix)
-   ============================================================ */
+/* ============ PEMTwin AI — Industrial White Theme ============ */
 
-/* Main app */
-.stApp {
-    background: #FFFFFF !important;
-    color: #0F172A !important;
+:root{
+    --accent: #2563EB;
+    --accent-dark: #1D4ED8;
+    --accent-light: #EFF6FF;
+    --ink: #0F172A;
+    --ink-soft: #475569;
+    --line: #E2E8F0;
+    --bg: #FFFFFF;
+    --bg-soft: #F8FAFC;
+    --success: #059669;
+    --warning: #D97706;
+    --danger: #DC2626;
+    --purple: #7C3AED;
+    --radius: 16px;
+    --shadow: 0 1px 2px rgba(15,23,42,0.04), 0 8px 24px rgba(15,23,42,0.06);
+    --shadow-hover: 0 4px 10px rgba(15,23,42,0.06), 0 16px 32px rgba(15,23,42,0.10);
 }
 
-/* Main container */
-.main .block-container {
-    background: #FFFFFF !important;
-    color: #0F172A !important;
+/* ---------- Force light color-scheme ----------
+   Prevents the browser/OS dark mode from silently
+   flipping default text colors to white-on-white. */
+html{
+    color-scheme: light;
 }
 
-/* All markdown text */
-.stMarkdown,
-.stMarkdown p,
-.stMarkdown div,
-.stMarkdown span,
-.stMarkdown li,
-.stMarkdown strong {
-    color: #0F172A !important;
+html, body, [class*="css"]  {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-/* Headers */
-h1, h2, h3, h4, h5, h6 {
-    color: #0F172A !important;
+.stApp{
+    background: var(--bg);
+    color: var(--ink);
 }
 
-/* Hero */
-.hero-title {
-    color: #0F172A !important;
+#MainMenu, footer, header {visibility: hidden;}
+
+.block-container{
+    padding-top: 1.2rem;
+    padding-bottom: 3rem;
+    max-width: 1300px;
 }
 
-.hero-sub {
-    color: #475569 !important;
+/* ============ GLOBAL TEXT & WIDGET FIXES ============
+   Streamlit doesn't inherit a text color for its own
+   generated markup (p, span, label, li, code, inputs,
+   selects, radio/checkbox text, metric labels, etc.).
+   Without this, dark-mode defaults make text invisible
+   on white cards until it's highlighted/selected. */
+
+.stApp, .stApp p, .stApp span, .stApp li, .stApp label,
+.stMarkdown, .stMarkdown p, .stMarkdown span, .stMarkdown li,
+.stText, .stCaption, .stCodeBlock, .stAlert, .stException {
+    color: var(--ink);
 }
 
-/* Section */
-.section-title {
-    color: #0F172A !important;
-    font-weight: 800;
-}
-
-.section-sub {
-    color: #475569 !important;
-}
-
-/* Brand */
-.pemtwin-title {
-    color: #0F172A !important;
-}
-
-.pemtwin-subtitle {
-    color: #475569 !important;
-}
-
-/* Cards */
-.card,
-.card *,
-.card-flat,
-.card-flat *,
-.nav-card,
-.nav-card *,
-.kpi-card,
-.kpi-card * {
-    color: inherit;
-}
-
-.card {
-    color: #0F172A !important;
-}
-
-.nav-card {
-    color: #0F172A !important;
-}
-
-.kpi-label {
-    color: #475569 !important;
-}
-
-.kpi-value {
-    color: #0F172A !important;
-}
-
-.kpi-unit {
-    color: #475569 !important;
-}
-
-/* Streamlit widgets */
-label,
-.stSelectbox label,
-.stSlider label,
-.stNumberInput label,
-.stTextInput label {
-    color: #0F172A !important;
-}
-
-/* Paragraphs */
-p {
-    color: #475569 !important;
-}
-
-/* Sidebar (if enabled later) */
-section[data-testid="stSidebar"] {
-    background: #FFFFFF !important;
-    color: #0F172A !important;
-}
-
-section[data-testid="stSidebar"] * {
-    color: #0F172A !important;
-}
-/* ==========================================================
-   STREAMLIT CLOUD OVERRIDE FIX
-   (Append this at the END of style.css)
-   ========================================================== */
-
-/* App background */
-.stApp {
-    background: #FFFFFF !important;
-}
-
-/* Keep all custom components intact */
-.hero-title,
-.section-title,
-.pemtwin-title {
-    color: var(--ink) !important;
-}
-
-.hero-sub,
-.section-sub,
-.pemtwin-subtitle {
+/* Secondary/caption text */
+.stCaption, small, .stMarkdown small {
     color: var(--ink-soft) !important;
 }
 
-/* Streamlit markdown */
-.stMarkdown p {
+/* Headings */
+h1, h2, h3, h4, h5, h6,
+.stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp h5, .stApp h6 {
+    color: var(--ink) !important;
+}
+
+/* Widget labels (selectbox, slider, radio, checkbox, text input, etc.) */
+[data-testid="stWidgetLabel"] p,
+[data-testid="stWidgetLabel"] label,
+.stSelectbox label, .stTextInput label, .stTextArea label,
+.stSlider label, .stRadio label, .stCheckbox label,
+.stNumberInput label, .stDateInput label, .stMultiSelect label {
+    color: var(--ink) !important;
+    font-weight: 600;
+}
+
+/* Text inputs / textareas / number inputs */
+input, textarea,
+.stTextInput input, .stTextArea textarea, .stNumberInput input {
+    color: var(--ink) !important;
+    background-color: var(--bg) !important;
+    caret-color: var(--ink) !important;
+}
+input::placeholder, textarea::placeholder {
+    color: var(--ink-soft) !important;
+    opacity: 1;
+}
+
+/* Selectbox / multiselect (BaseWeb) */
+div[data-baseweb="select"] > div{
+    background-color: var(--bg) !important;
+    color: var(--ink) !important;
+    border-color: var(--line) !important;
+}
+div[data-baseweb="select"] span, div[data-baseweb="select"] div{
+    color: var(--ink) !important;
+}
+/* Dropdown popover options list */
+div[data-baseweb="popover"] li, div[data-baseweb="menu"] li{
+    color: var(--ink) !important;
+    background-color: var(--bg) !important;
+}
+div[data-baseweb="popover"] li:hover, div[data-baseweb="menu"] li:hover{
+    background-color: var(--accent-light) !important;
+}
+
+/* Radio & checkbox option text */
+.stRadio div[role="radiogroup"] label p,
+.stCheckbox label p {
+    color: var(--ink) !important;
+}
+
+/* st.metric */
+[data-testid="stMetric"]{
+    color: var(--ink);
+}
+[data-testid="stMetricLabel"] {
     color: var(--ink-soft) !important;
 }
-
-.stMarkdown h1,
-.stMarkdown h2,
-.stMarkdown h3,
-.stMarkdown h4,
-.stMarkdown h5,
-.stMarkdown h6 {
+[data-testid="stMetricValue"] {
     color: var(--ink) !important;
 }
-
-/* Streamlit widget labels */
-label,
-.stSlider label,
-.stNumberInput label,
-.stTextInput label,
-.stSelectbox label,
-.stRadio label,
-.stCheckbox label {
-    color: var(--ink) !important;
-}
-
-/* Widget text */
-.stSlider,
-.stNumberInput,
-.stTextInput,
-.stSelectbox {
-    color: var(--ink) !important;
-}
-
-/* Dataframe & metrics */
-[data-testid="stMetricLabel"],
-[data-testid="stMetricValue"],
 [data-testid="stMetricDelta"] {
     color: var(--ink) !important;
 }
 
-/* Don't let Streamlit fade text */
-.stMarkdown,
-.element-container,
-[data-testid="stMarkdownContainer"] {
-    opacity: 1 !important;
+/* Tables / dataframes */
+[data-testid="stTable"], [data-testid="stDataFrame"]{
+    color: var(--ink);
 }
 
-/* Buttons */
-div.stButton > button {
-    color: inherit;
+/* Tabs */
+button[data-baseweb="tab"]{
+    color: var(--ink-soft) !important;
+}
+button[data-baseweb="tab"][aria-selected="true"]{
+    color: var(--accent-dark) !important;
 }
 
-/* Links */
-a {
-    color: var(--accent) !important;
+/* Expander header text */
+.streamlit-expanderHeader, [data-testid="stExpander"] summary p {
+    color: var(--ink) !important;
 }
+
+/* Code blocks */
+code, pre, .stCodeBlock code {
+    color: var(--ink) !important;
+}
+
+/* ============ END GLOBAL TEXT & WIDGET FIXES ============ */
+
+/* ---------- Top Nav ---------- */
+.pemtwin-topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 14px 6px 10px 6px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 18px;
+}
+.pemtwin-brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+.pemtwin-logo{
+    width:46px;height:46px;border-radius:12px;
+    background: linear-gradient(135deg, var(--accent), #60A5FA);
+    display:flex;align-items:center;justify-content:center;
+    color:white;font-weight:800;font-size:18px;
+    box-shadow: var(--shadow);
+}
+.pemtwin-title{
+    font-size:20px;font-weight:800;color:var(--ink);line-height:1.1;
+}
+.pemtwin-subtitle{
+    font-size:12px;color:var(--ink-soft);font-weight:500;
+}
+
+/* ---------- Option Menu overrides ---------- */
+div[data-testid="stHorizontalBlock"] {gap: 0.6rem;}
+
+/* ---------- Cards ---------- */
+.card{
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    box-shadow: var(--shadow);
+    transition: all .2s ease;
+    color: var(--ink);
+}
+.card:hover{
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+}
+.card-flat{
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    color: var(--ink);
+}
+
+/* ---------- Hero ---------- */
+.hero-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    background: var(--accent-light);
+    color: var(--accent-dark);
+    font-weight:600;font-size:12.5px;
+    padding:6px 14px;border-radius:999px;
+    border:1px solid #DBEAFE;
+    margin-bottom:14px;
+}
+.hero-title{
+    font-size:44px;font-weight:850;letter-spacing:-0.02em;color:var(--ink);
+    margin-bottom:6px;
+}
+.hero-sub{
+    font-size:16px;color:var(--ink-soft);max-width:720px;line-height:1.55;
+}
+
+/* ---------- KPI Cards ---------- */
+.kpi-card{
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent);
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFF 100%);
+    box-shadow: var(--shadow);
+    transition: all .2s ease;
+    position:relative;
+    overflow:hidden;
+}
+.kpi-card:hover{ box-shadow: var(--shadow-hover); transform: translateY(-2px);}
+.kpi-label{ font-size:13px; font-weight:700; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.04em;}
+.kpi-value{ font-size:30px; font-weight:800; color:var(--ink); margin-top:6px;}
+.kpi-unit{ font-size:13px; color:var(--ink-soft); font-weight:500;}
+.kpi-delta{ font-size:12.5px; font-weight:600; margin-top:6px;}
+
+/* colored accents */
+.kpi-blue{ border-left-color:#2563EB; }
+.kpi-green{ border-left-color:#059669; }
+.kpi-orange{ border-left-color:#D97706; }
+.kpi-purple{ border-left-color:#7C3AED; }
+
+/* ---------- Section headers ---------- */
+.section-title{
+    font-size:22px;font-weight:800;color:var(--ink);margin-bottom:2px;
+}
+.section-sub{
+    font-size:14px;color:var(--ink-soft);margin-bottom:16px;
+}
+
+/* ---------- Pills / badges ---------- */
+.pill{
+    display:inline-block;padding:4px 12px;border-radius:999px;
+    font-size:12px;font-weight:700;
+}
+.pill-blue{ background:#EFF6FF;color:#1D4ED8; }
+.pill-green{ background:#ECFDF5;color:#047857; }
+.pill-orange{ background:#FFF7ED;color:#C2410C; }
+.pill-purple{ background:#F5F3FF;color:#6D28D9; }
+.pill-gray{ background:#F1F5F9;color:#475569; }
+
+/* ---------- Nav cards (home) ---------- */
+.nav-card{
+    border:1px solid var(--line);
+    border-radius: var(--radius);
+    padding:20px;
+    background:var(--bg);
+    box-shadow: var(--shadow);
+    transition: all .2s ease;
+    height:100%;
+    color: var(--ink);
+}
+.nav-card:hover{
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-3px);
+    border-color:#BFDBFE;
+}
+.nav-card-icon{
+    width:42px;height:42px;border-radius:10px;
+    background:var(--accent-light);
+    display:flex;align-items:center;justify-content:center;
+    font-size:20px;margin-bottom:10px;
+}
+
+/* ---------- Health indicator ---------- */
+.health-dot{
+    width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px;
+}
+.health-good{ background:#059669; }
+.health-warn{ background:#D97706; }
+.health-bad{ background:#DC2626; }
+
+/* ---------- Buttons ---------- */
+div.stButton > button{
+    border-radius:12px;
+    font-weight:700;
+    border:1px solid var(--line);
+    box-shadow: var(--shadow);
+    transition: all .15s ease;
+    color: var(--ink);
+    background-color: var(--bg);
+}
+div.stButton > button:hover{
+    border-color: var(--accent);
+    color: var(--accent-dark);
+    box-shadow: var(--shadow-hover);
+}
+div.stButton > button[kind="primary"]{
+    background: var(--accent);
+    border-color: var(--accent);
+    color:white;
+}
+div.stButton > button[kind="primary"]:hover{
+    background: var(--accent-dark);
+    color:white;
+}
+
+/* Sliders accent */
+div[data-baseweb="slider"] div[role="slider"]{
+    background-color: var(--accent) !important;
+}
+
+/* Footer */
+.pemtwin-footer{
+    text-align:center;color:var(--ink-soft);font-size:12.5px;
+    padding-top:30px;border-top:1px solid var(--line);margin-top:40px;
+}
+
+hr{ border-color: var(--line); }
