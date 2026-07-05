@@ -37,7 +37,7 @@ def render(go_to):
 
     with left:
         card_open()
-        st.markdown("#### 🎛️ Operating Conditions")
+        st.markdown("#### Operating Conditions")
         st.caption("Adjust the operating parameters of the PEM electrolyser")
 
         temperature = st.slider("Temperature (K)", min_value=round(t_min, 2), max_value=round(t_max, 2),
@@ -48,7 +48,7 @@ def render(go_to):
                                   value=round((c_min + c_max) / 2, 2), step=0.1)
 
         st.write("")
-        predict_clicked = st.button("🚀 Predict", type="primary", use_container_width=True)
+        predict_clicked = st.button("Predict", type="primary", use_container_width=True)
         card_close()
 
     # Run predictions (auto-update, "Predict" just gives a tactile confirmation)
@@ -69,7 +69,7 @@ def render(go_to):
 
     with right:
         card_open()
-        st.markdown("#### 📊 Model Predictions")
+        st.markdown("#### Model Predictions")
         st.caption("Predicted performance metrics of the PEM electrolyser (with 95% confidence interval where available)")
 
         k1, k2 = st.columns(2)
