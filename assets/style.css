@@ -112,3 +112,82 @@ section[data-testid="stSidebar"] {
 section[data-testid="stSidebar"] * {
     color: #0F172A !important;
 }
+/* ==========================================================
+   STREAMLIT CLOUD OVERRIDE FIX
+   (Append this at the END of style.css)
+   ========================================================== */
+
+/* App background */
+.stApp {
+    background: #FFFFFF !important;
+}
+
+/* Keep all custom components intact */
+.hero-title,
+.section-title,
+.pemtwin-title {
+    color: var(--ink) !important;
+}
+
+.hero-sub,
+.section-sub,
+.pemtwin-subtitle {
+    color: var(--ink-soft) !important;
+}
+
+/* Streamlit markdown */
+.stMarkdown p {
+    color: var(--ink-soft) !important;
+}
+
+.stMarkdown h1,
+.stMarkdown h2,
+.stMarkdown h3,
+.stMarkdown h4,
+.stMarkdown h5,
+.stMarkdown h6 {
+    color: var(--ink) !important;
+}
+
+/* Streamlit widget labels */
+label,
+.stSlider label,
+.stNumberInput label,
+.stTextInput label,
+.stSelectbox label,
+.stRadio label,
+.stCheckbox label {
+    color: var(--ink) !important;
+}
+
+/* Widget text */
+.stSlider,
+.stNumberInput,
+.stTextInput,
+.stSelectbox {
+    color: var(--ink) !important;
+}
+
+/* Dataframe & metrics */
+[data-testid="stMetricLabel"],
+[data-testid="stMetricValue"],
+[data-testid="stMetricDelta"] {
+    color: var(--ink) !important;
+}
+
+/* Don't let Streamlit fade text */
+.stMarkdown,
+.element-container,
+[data-testid="stMarkdownContainer"] {
+    opacity: 1 !important;
+}
+
+/* Buttons */
+div.stButton > button {
+    color: inherit;
+}
+
+/* Links */
+a {
+    color: var(--accent) !important;
+}
