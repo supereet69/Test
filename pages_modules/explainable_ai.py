@@ -15,6 +15,10 @@ from utils.data_loader import load_rf_models, load_main_dataset, TARGET_META
 FEATURES = ["Temperature", "Voltage", "Conductivity"]
 FEATURE_COLORS = {"Temperature": "#DC2626", "Voltage": "#2563EB", "Conductivity": "#059669"}
 
+# Reused on every Plotly chart so hover tooltips are always readable
+# (white background, dark text) regardless of the app's theme.
+HOVERLABEL = dict(bgcolor="white", font_color="#0F172A", font_size=13, bordercolor="#E2E8F0")
+
 
 @st.cache_data(show_spinner=False)
 def compute_shap(_model, X: pd.DataFrame, target_key: str):
@@ -81,6 +85,7 @@ def render(go_to):
         paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
         xaxis_title="mean(|SHAP value|)", yaxis=dict(autorange="reversed"),
         font=dict(color="#0F172A"),
+        hoverlabel=HOVERLABEL,
     )
     card_open()
     st.plotly_chart(fi_fig, use_container_width=True, config={"displayModeBar": False})
@@ -114,6 +119,7 @@ def render(go_to):
         yaxis=dict(tickmode="array", tickvals=list(range(len(ordered_features))), ticktext=ordered_features),
         xaxis_title="SHAP value (impact on model output)",
         font=dict(color="#0F172A"),
+        hoverlabel=HOVERLABEL,
     )
     card_open()
     st.plotly_chart(summary_fig, use_container_width=True, config={"displayModeBar": False})
@@ -139,6 +145,7 @@ def render(go_to):
         paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
         xaxis_title=dep_feature, yaxis_title=f"SHAP value for {dep_feature}",
         font=dict(color="#0F172A"),
+        hoverlabel=HOVERLABEL,
     )
     card_open()
     st.plotly_chart(dep_fig, use_container_width=True, config={"displayModeBar": False})
@@ -172,6 +179,7 @@ def render(go_to):
         height=280, margin=dict(l=10, r=10, t=10, b=10),
         paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
         font=dict(color="#0F172A"),
+        hoverlabel=HOVERLABEL,
     )
     card_open()
     st.plotly_chart(wf, use_container_width=True, config={"displayModeBar": False})
