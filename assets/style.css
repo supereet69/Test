@@ -333,3 +333,16 @@ div[data-baseweb="slider"] div[role="slider"]{
 }
 
 hr{ border-color: var(--line); }
+/* Force black text on all Plotly charts */
+.js-plotly-plot text, .js-plotly-plot tspan {
+    fill: #0F172A !important;
+}
+
+/* Force white bg + black text on Streamlit dataframes */
+[data-testid="stDataFrame"] {
+    background-color: white !important;
+}
+[data-testid="stDataFrame"] div, [data-testid="stDataFrame"] span {
+    color: #0F172A !important;
+    background-color: white !important;
+}
