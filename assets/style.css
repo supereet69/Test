@@ -147,14 +147,20 @@ button[data-baseweb="tab"][aria-selected="true"]{
     color: var(--ink) !important;
 }
 
-/* Code blocks (st.code) — Streamlit keeps a dark background here by
-   default. Set BOTH background and text so we never get black-on-black. */
-.stCodeBlock, .stCodeBlock pre, .stCodeBlock code,
-div[data-testid="stCodeBlock"] pre {
-    background-color: var(--bg-soft) !important;
-    color: var(--ink) !important;
+/* Code blocks (st.code) — Streamlit's syntax highlighter injects its
+   own inline-styled spans, which beat a weak override. Hit every level
+   (container, pre, code, and the highlighter spans) so nothing sneaks
+   through as black-on-black or white-on-white. */
+.stCodeBlock, div[data-testid="stCodeBlock"] {
+    background-color: white !important;
     border: 1px solid var(--line);
     border-radius: 10px;
+}
+.stCodeBlock pre, .stCodeBlock code,
+div[data-testid="stCodeBlock"] pre, div[data-testid="stCodeBlock"] code,
+div[data-testid="stCodeBlock"] span {
+    background-color: white !important;
+    color: #0F172A !important;
 }
 
 /* ============ END GLOBAL TEXT & WIDGET FIXES ============ */
