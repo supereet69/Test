@@ -1,0 +1,5 @@
+Target,RF (5-Fold R²),RF (External R²),RF MAPE (%),GPR (5-Fold R²),GPR (External R²),GPR MAPE (%),Selected
+H₂ Production,0.9418,0.9514,13.48,0.9905,0.9955,1.87,GPR
+Efficiency,0.9999,0.99999,0.0197,1,1,0.003,GPR
+Voltage Loss,0.9999,0.99999,0.0812,1,1,0.00002,GPR
+Degradation Index,0.9795,0.9504,12.63,0.9951,0.9649,10.35,GPR
